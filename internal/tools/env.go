@@ -29,6 +29,4 @@ func EnvLoad() {
 	setEnv("NTFY_ROOM", "esp32-alerts")
 	setEnv("NTFY_TITLE", "Warning")
 	setEnv("NTFY_MSG", "Hotspot is down! Turn it back on.")
-
-	fmt.Printf("PASSWORD: %s\n", os.Getenv("PASSWORD"))
 }

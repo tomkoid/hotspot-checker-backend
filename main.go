@@ -1,14 +1,13 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
-	"net/http"
 	"os"
 	"time"
 
 	"github.com/labstack/echo/v4"
 
+	"codeberg.org/tomkoid/http-server-count/internal/models"
 	"codeberg.org/tomkoid/http-server-count/internal/routes"
 	"codeberg.org/tomkoid/http-server-count/internal/tools"
 )
@@ -32,17 +31,14 @@ func main() {
 				fmt.Println("too soon")
 
 				// send ntfy notification
-				req, err := http.NewRequest(
-					"POST",
-					fmt.Sprintf("https://ntfy.sh/%s", os.Getenv("NTFY_ROOM")),
-					bytes.NewBuffer([]byte(os.Getenv("NTFY_MSG"))),
-				)
+				notifReq := models.NotificationRequest{
+					Title:    os.Getenv("NTFY_TITLE"),
+					Message:  os.Getenv("NTFY_MSG"),
+					Tags:     "warning,skull",
+					Priority: "urgent",
+				}
 
-				req.Header.Set("Priority", "urgent")
-				req.Header.Set("Title", os.Getenv("NTFY_TITLE"))
-				req.Header.Set("Tags", "warning,skull")
-
-				reqResp, err := http.DefaultClient.Do(req)
+				reqResp, err := tools.SendNotification(&notifReq)
 				if err != nil {
 					fmt.Println(err)
 				}
