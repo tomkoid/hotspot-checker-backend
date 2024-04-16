@@ -1,10 +1,14 @@
 package tools
 
-import "github.com/joho/godotenv"
+import (
+	"fmt"
+
+	"github.com/joho/godotenv"
+)
 
 func EnvLoad() {
 	err := godotenv.Load()
 	if err != nil {
-		panic(".env: Error loading .env file")
+		fmt.Println(".env: no env file doesn't exist")
 	}
 }
