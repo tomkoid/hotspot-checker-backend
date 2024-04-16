@@ -1,0 +1,25 @@
+# fly.toml app configuration file generated for http-server-count on 2024-04-16T16:57:59+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'http-server-count'
+primary_region = 'ams'
+
+[build]
+  [build.args]
+    GO_VERSION = '1.22.2'
+
+[env]
+  PORT = '3000'
+
+[http_service]
+  internal_port = 3000 
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  size = 'shared-cpu-1x'
