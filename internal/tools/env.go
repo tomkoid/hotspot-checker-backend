@@ -3,29 +3,32 @@ package tools
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/joho/godotenv"
 )
 
 func setEnv(key, value string) {
-	if os.Getenv(key) != "" {
+	if strings.TrimSpace(os.Getenv(key)) != "" {
 		return
+	} else {
+		fmt.Printf("%s: %s (%s)\n", key, os.Getenv(key), value)
 	}
 
 	os.Setenv(key, value)
 }
 
 func EnvLoad() {
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println(".env: no env file doesn't exist")
+	}
+
 	// set default values
 	setEnv("PASSWORD", "esp32")
 	setEnv("NTFY_ROOM", "esp32-alerts")
 	setEnv("NTFY_TITLE", "Warning")
 	setEnv("NTFY_MSG", "Hotspot is down! Turn it back on.")
 
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Println(".env: no env file doesn't exist")
-
-		return
-	}
+	fmt.Printf("PASSWORD: %s\n", os.Getenv("PASSWORD"))
 }
