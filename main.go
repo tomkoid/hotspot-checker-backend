@@ -17,6 +17,7 @@ func main() {
 	tools.EnvLoad()
 
 	e := echo.New()
+	e.HideBanner = true
 
 	routes.RegisterRoutes(e)
 
