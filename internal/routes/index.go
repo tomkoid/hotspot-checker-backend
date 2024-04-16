@@ -12,8 +12,10 @@ import (
 
 func indexRoute(c echo.Context) error {
 	resp := models.Response{
-		Count:                 Count,
-		LastUpdateTimeSeconds: time.Since(LastUpdateTime).Seconds(),
+		Count:                   Count,
+		LastUpdateTimeSeconds:   time.Since(LastUpdateTime).Seconds(),
+		Stopped:                 Stopped,
+		SentConsecutiveMessages: SentConsecutiveMessages,
 	}
 
 	fmt.Printf("Count: %d\n", Count)
