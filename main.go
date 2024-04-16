@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/labstack/echo/v4"
@@ -33,11 +34,12 @@ func main() {
 				// send ntfy notification
 				req, err := http.NewRequest(
 					"POST",
-					"https://ntfy.sh/espalerts-filiphotspot",
-					bytes.NewBuffer([]byte("ENABLE HOTSPOT!!!!")),
+					fmt.Sprintf("https://ntfy.sh/%s", os.Getenv("NTFY_ROOM")),
+					bytes.NewBuffer([]byte(os.Getenv("NTFY_MSG"))),
 				)
 
 				req.Header.Set("Priority", "urgent")
+				req.Header.Set("Title", os.Getenv("NTFY_TITLE"))
 				req.Header.Set("Tags", "warning,skull")
 
 				reqResp, err := http.DefaultClient.Do(req)
