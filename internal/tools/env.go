@@ -7,12 +7,20 @@ import (
 	"github.com/joho/godotenv"
 )
 
+func setEnv(key, value string) {
+	if os.Getenv(key) != "" {
+		return
+	}
+
+	os.Setenv(key, value)
+}
+
 func EnvLoad() {
 	// set default values
-	os.Setenv("PASSWORD", "esp32")
-	os.Setenv("NTFY_ROOM", "esp32-alerts")
-	os.Setenv("NTFY_TITLE", "Warning")
-	os.Setenv("NTFY_MSG", "Hotspot is down! Turn it back on.")
+	setEnv("PASSWORD", "esp32")
+	setEnv("NTFY_ROOM", "esp32-alerts")
+	setEnv("NTFY_TITLE", "Warning")
+	setEnv("NTFY_MSG", "Hotspot is down! Turn it back on.")
 
 	err := godotenv.Load()
 	if err != nil {
