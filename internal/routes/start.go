@@ -14,7 +14,7 @@ import (
 func sendStartNotification() {
 	notifReq := models.NotificationRequest{
 		Title:    "Status",
-		Message:  "ESP is up!",
+		Message:  "Device is up!",
 		Tags:     "",
 		Priority: "min",
 	}

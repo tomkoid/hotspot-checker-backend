@@ -14,7 +14,7 @@ import (
 func sendStopNotification() {
 	notifReq := models.NotificationRequest{
 		Title:    "Status",
-		Message:  "ESP has stopped!",
+		Message:  "Device has been stopped!",
 		Tags:     "",
 		Priority: "min",
 	}
