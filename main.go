@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"time"
 
@@ -24,11 +25,14 @@ func main() {
 	go func() {
 		for {
 			timeSince := time.Since(routes.LastUpdateTime)
-			fmt.Printf("Last update: %.2fs, Stopped: %t\n", timeSince.Seconds(), routes.Stopped)
+
+			if os.Getenv("DEBUG") == "true" {
+				fmt.Printf("Last update: %.2fs, Stopped: %t\n", timeSince.Seconds(), routes.Stopped)
+			}
 
 			if timeSince.Seconds() > 35.0 && routes.SentConsecutiveMessages < 2 && !routes.Stopped {
 				routes.SentConsecutiveMessages++
-				fmt.Println("too soon")
+				log.Println("Too late!")
 
 				// send ntfy notification
 				notifReq := models.NotificationRequest{
@@ -40,11 +44,11 @@ func main() {
 
 				reqResp, err := tools.SendNotification(&notifReq)
 				if err != nil {
-					fmt.Println(err)
+					log.Println(err)
 				}
 
 				if reqResp.StatusCode == 200 {
-					fmt.Println("sent ntfy notification")
+					log.Println("Sent ntfy notification!")
 					routes.LastUpdateTime = time.Now()
 				}
 			}

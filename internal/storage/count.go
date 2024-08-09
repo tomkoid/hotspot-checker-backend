@@ -2,12 +2,15 @@ package storage
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 )
 
 func SaveCount(count *int) {
-	fmt.Printf("Saving count: %d\n", *count)
+	if os.Getenv("DEBUG") == "true" {
+		log.Printf("Saving count: %d\n", *count)
+	}
 
 	configDir, _ := os.UserCacheDir()
 

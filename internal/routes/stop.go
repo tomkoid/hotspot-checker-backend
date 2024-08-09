@@ -25,7 +25,7 @@ func sendStopNotification() {
 	}
 
 	if reqResp.StatusCode == 200 {
-		fmt.Println("start: sent ntfy notification")
+		fmt.Println("stop: sent ntfy notification")
 	}
 }
 
