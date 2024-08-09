@@ -24,7 +24,7 @@ func main() {
 	go func() {
 		for {
 			timeSince := time.Since(routes.LastUpdateTime)
-			fmt.Printf("Last update: %.2fs\nStopped: %t\n", timeSince.Seconds(), routes.Stopped)
+			fmt.Printf("Last update: %.2fs, Stopped: %t\n", timeSince.Seconds(), routes.Stopped)
 
 			if timeSince.Seconds() > 35.0 && routes.SentConsecutiveMessages < 2 && !routes.Stopped {
 				routes.SentConsecutiveMessages++
@@ -53,5 +53,5 @@ func main() {
 		}
 	}()
 
-	e.Logger.Fatal(e.Start("0.0.0.0:3000"))
+	e.Logger.Fatal(e.Start(fmt.Sprintf("%s:%s", os.Getenv("HOST"), os.Getenv("PORT"))))
 }

@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -17,8 +16,6 @@ func indexRoute(c echo.Context) error {
 		Stopped:                 Stopped,
 		SentConsecutiveMessages: SentConsecutiveMessages,
 	}
-
-	fmt.Printf("Count: %d\n", Count)
 
 	return c.JSON(http.StatusOK, resp)
 }
