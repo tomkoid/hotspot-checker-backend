@@ -11,6 +11,10 @@ import (
 	"codeberg.org/tomkoid/http-server-count/internal/tools"
 )
 
+var (
+	writeSave = true
+)
+
 func countRoute(c echo.Context) error {
 	SentConsecutiveMessages = 0
 
@@ -20,7 +24,13 @@ func countRoute(c echo.Context) error {
 	}
 
 	Count++
-	storage.SaveCount(&Count)
+
+	if writeSave {
+		err = storage.SaveCount(&Count)
+		if err != nil {
+			writeSave = false
+		}
+	}
 
 	LastUpdateTime = time.Now()
 

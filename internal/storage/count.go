@@ -7,18 +7,27 @@ import (
 	"strconv"
 )
 
-func SaveCount(count *int) {
+func SaveCount(count *int) error {
 	if os.Getenv("DEBUG") == "true" {
 		log.Printf("Saving count: %d\n", *count)
 	}
 
-	configDir, _ := os.UserCacheDir()
+	configDir, err := os.UserCacheDir()
+
+	if err != nil {
+		fmt.Println("save: could not get user config dir")
+		configDir = "/"
+	}
 
 	// check if file already exists
-	_, err := os.Stat(configDir + "/http-server-count.txt")
+	_, err = os.Stat(configDir + "/http-server-count.txt")
 	if err != nil {
 		// create file
-		file, _ := os.Create(configDir + "/http-server-count.txt")
+		file, err := os.Create(configDir + "/http-server-count.txt")
+		if err != nil {
+			fmt.Println("save: could not create file")
+			return err
+		}
 		// write count
 		file.WriteString(fmt.Sprintf("%d", *count))
 		file.Close()
@@ -30,6 +39,8 @@ func SaveCount(count *int) {
 		file.WriteString(fmt.Sprintf("%d", *count))
 		file.Close()
 	}
+
+	return nil
 }
 
 func GetCount() int {
