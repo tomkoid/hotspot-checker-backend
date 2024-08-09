@@ -26,6 +26,7 @@ func EnvLoad() {
 
 	// set default values
 	setEnv("PASSWORD", "esp32")
+	setEnv("NTFY_HOST", "ntfy.sh")
 	setEnv("NTFY_ROOM", "esp32-alerts")
 	setEnv("NTFY_TITLE", "Warning")
 	setEnv("NTFY_MSG", "Hotspot is down! Turn it back on.")

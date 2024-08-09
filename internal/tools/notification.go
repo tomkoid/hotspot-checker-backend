@@ -12,7 +12,7 @@ import (
 func SendNotification(notifReq *models.NotificationRequest) (*http.Response, error) {
 	req, err := http.NewRequest(
 		"POST",
-		fmt.Sprintf("https://ntfy.sh/%s", os.Getenv("NTFY_ROOM")),
+		fmt.Sprintf("https://%s/%s", os.Getenv("NTFY_HOST"), os.Getenv("NTFY_ROOM")),
 		bytes.NewBuffer([]byte(notifReq.Message)),
 	)
 	if err != nil {
