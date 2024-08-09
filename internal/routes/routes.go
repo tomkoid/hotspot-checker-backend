@@ -30,6 +30,7 @@ func RegisterRoutes(e *echo.Echo) {
 	loadSecretPassword()
 
 	e.GET("/", indexRoute)
+	e.POST("/", countRoute)
 	e.POST("/count", countRoute)
 	e.POST("/start", startRoute)
 	e.POST("/stop", stopRoute)
