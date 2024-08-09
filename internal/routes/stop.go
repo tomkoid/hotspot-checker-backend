@@ -35,6 +35,10 @@ func stopRoute(c echo.Context) error {
 		return c.String(http.StatusBadRequest, err.Error())
 	}
 
+	if Stopped {
+		return c.String(http.StatusBadRequest, "Already stopped")
+	}
+
 	LastUpdateTime = time.Now()
 	Stopped = true
 
