@@ -28,6 +28,7 @@ func EnvLoad() {
 	setEnv("PASSWORD", "esp32")
 	setEnv("HOST", "0.0.0.0")
 	setEnv("PORT", "3000")
+	setEnv("TIMEOUT", "60")
 	setEnv("NTFY_HOST", "ntfy.sh")
 	setEnv("NTFY_ROOM", "esp32-alerts")
 	setEnv("NTFY_TITLE", "Warning")

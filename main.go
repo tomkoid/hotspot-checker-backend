@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/labstack/echo/v4"
@@ -22,6 +23,11 @@ func main() {
 
 	routes.RegisterRoutes(e)
 
+	waitTimeout, err := strconv.Atoi(os.Getenv("TIMEOUT"))
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	go func() {
 		for {
 			timeSince := time.Since(routes.LastUpdateTime)
@@ -30,7 +36,7 @@ func main() {
 				fmt.Printf("Last update: %.2fs, Stopped: %t\n", timeSince.Seconds(), routes.Stopped)
 			}
 
-			if timeSince.Seconds() > 35.0 && routes.SentConsecutiveMessages < 2 && !routes.Stopped {
+			if timeSince.Seconds() > float64(waitTimeout) && routes.SentConsecutiveMessages < 2 && !routes.Stopped {
 				routes.SentConsecutiveMessages++
 				log.Println("Too late!")
 
