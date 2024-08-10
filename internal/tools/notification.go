@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"os"
 
-	"codeberg.org/tomkoid/http-server-count/internal/models"
+	"codeberg.org/tomkoid/hotspot-checker-backend/internal/models"
 )
 
 func SendNotification(notifReq *models.NotificationRequest) (*http.Response, error) {

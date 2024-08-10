@@ -7,7 +7,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 
-	"codeberg.org/tomkoid/http-server-count/internal/storage"
+	"codeberg.org/tomkoid/hotspot-checker-backend/internal/storage"
 )
 
 var (

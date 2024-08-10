@@ -7,8 +7,8 @@ import (
 
 	"github.com/labstack/echo/v4"
 
-	"codeberg.org/tomkoid/http-server-count/internal/models"
-	"codeberg.org/tomkoid/http-server-count/internal/tools"
+	"codeberg.org/tomkoid/hotspot-checker-backend/internal/models"
+	"codeberg.org/tomkoid/hotspot-checker-backend/internal/tools"
 )
 
 func sendStopNotification() {

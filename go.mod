@@ -1,4 +1,4 @@
-module codeberg.org/tomkoid/http-server-count
+module codeberg.org/tomkoid/hotspot-checker-backend
 
 go 1.22.2
 
